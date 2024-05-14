@@ -1,9 +1,7 @@
-
-
 #include <stdio.h> 
   
 // funcao para trocar os elementos
-void swap(int* a, int* b) 
+void troca(int* a, int* b) 
 { 
     int temp = *a; 
     *a = *b; 
@@ -11,7 +9,7 @@ void swap(int* a, int* b)
 } 
   
 // particao da funcao
-int partition(int arr[], int baixo, int alto) 
+int particao(int arr[], int baixo, int alto) 
 { 
   
     // instanciar o pivo para ser o primeiro elemento
@@ -21,22 +19,22 @@ int partition(int arr[], int baixo, int alto)
   
     while (i < j) { 
   
-        // condition 1: find the first element greater than 
-        // the pivot (from starting) 
+        // condicao 1: achar o primeiro elemento maior que o pivo
         while (arr[i] <= pivo && i <= alto - 1) { 
             i++; 
         } 
   
-        // condition 2: find the first element smaller than 
-        // the pivot (from last) 
+        // condicao 2: achar o primeiro elemento menor que o pivo
         while (arr[j] > pivo && j >= baixo + 1) { 
             j--; 
         } 
+        // caso o endereco seja menor, realizar a troca
         if (i < j) { 
-            swap(&arr[i], &arr[j]); 
+            troca(&arr[i], &arr[j]); 
         } 
     } 
-    swap(&arr[baixo], &arr[j]); 
+    // no final, realiza a troca dos dois enderecos
+    troca(&arr[baixo], &arr[j]); 
     return j; 
 } 
   
@@ -45,31 +43,31 @@ void quickSort(int arr[], int baixo, int alto)
 { 
     if (baixo < alto) { 
   
-        int partitionIndex = partition(arr, baixo, alto); 
+        int enderecoParticao = particao(arr, baixo, alto); 
   
    
-        quickSort(arr, baixo, partitionIndex - 1); 
-        quickSort(arr, partitionIndex + 1, alto); 
+        quickSort(arr, baixo, enderecoParticao- 1); 
+        quickSort(arr, enderecoParticao + 1, alto); 
     } 
 } 
   
 int main() 
 { 
-    int arr[] = { 19, 17, 15, 12, 16, 18, 4, 11, 13 }; 
-    int n = sizeof(arr) / sizeof(arr[0]); 
+    int arr[] = {9,238,71283,23,23,23,23,23,23,23,23,3231,9823,10}; 
+    int tamanho = sizeof(arr) / sizeof(arr[0]); 
   
-    // printing the original array 
-    printf("Original array: "); 
-    for (int i = 0; i < n; i++) { 
+    // mostrar o array original
+    printf("Array original: "); 
+    for (int i = 0; i < tamanho; i++) { 
         printf("%d ", arr[i]); 
     } 
   
-    // calling quickSort() to sort the given array 
-    quickSort(arr, 0, n - 1); 
+    // chamando quickSort para ordenar o array original
+    quickSort(arr, 0, tamanho - 1); 
   
-    // printing the sorted array 
-    printf("\nSorted array: "); 
-    for (int i = 0; i < n; i++) { 
+    // mostrar os dados ordenados
+    printf("\nArray ordenado: "); 
+    for (int i = 0; i < tamanho; i++) { 
         printf("%d ", arr[i]); 
     } 
   
