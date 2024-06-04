@@ -27,7 +27,6 @@ void mostrarDados(int arr[], int tamanho)
 // particao da funcao
 int particao(int arr[], int baixo, int alto)
 {
-
     // instanciar o pivo para ser o primeiro elemento
     int pivo = arr[baixo];
     int i = baixo;
@@ -63,7 +62,6 @@ void quickSort(int arr[], int baixo, int alto)
 {
     if (baixo < alto)
     {
-
         int enderecoParticao = particao(arr, baixo, alto);
 
         quickSort(arr, baixo, enderecoParticao - 1);
@@ -74,13 +72,13 @@ void quickSort(int arr[], int baixo, int alto)
 int main()
 {
     // declarando, respecitvamente, a linha a ser lida e o contador de arquivos
-    string linha_;
+    std::string linha_;
     int k = 0;
     // limpando o arquivo txt do bubble_sort por execucao
     std::fstream file("quick_sort.txt", std::ios::out | std::ios::trunc);
-    ofstream arquivoEscrita_("quick_sort.txt", std::ios::app);
+    std::ofstream arquivoEscrita_("quick_sort.txt", std::ios::app);
     if (arquivoEscrita_.is_open())
-    {
+   {
         arquivoEscrita_ << "caminho,temp_execucao,qtde \n";
     }
     while (k < 490)
@@ -90,7 +88,7 @@ int main()
         int tamanho = 0;
         // abrindo o arquivo TXT
         // preparando a leitura do arquivo com os dados
-        ifstream arquivoLeitura_(filePaths[k]);
+        std::ifstream arquivoLeitura_(filePaths[k]);
         // preparando a escrita do arquivo para os dados finais
         // ofstream arquivoEscrita_("bubble_sort.txt", std::ios::app);
         //     arquivoEscrita_.close();
@@ -116,12 +114,12 @@ int main()
             auto final = std::chrono::high_resolution_clock::now();
             auto duracao = std::chrono::duration_cast<std::chrono::milliseconds>(final - comeco);
             mostrarDados(arr, sizeof(arr) / sizeof(arr[0]));
-            cout << tamanho - 1 << "\n";
+            std::cout << tamanho - 1 << "\n";
             if (arquivoEscrita_.is_open())
             {
                 arquivoEscrita_ << filePaths[k] << "," << duracao.count() << "ms," << tamanho - 1 << "\n";
             }
-            arquivoLeitura_.close();
+           arquivoLeitura_.close();
         }
         k++;
     }

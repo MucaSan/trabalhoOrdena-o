@@ -1,14 +1,12 @@
 #include <stdio.h>
 #include <fstream>
 #include <string>
-#include <fstream>
 #include <iostream>
 #include <filesystem>
 #include <chrono>
 #include "lib.h"
 
-using namespace std;
-namespace fs = std::filesystem;
+
 
 void troca(int *arr, int i, int j)
 {
@@ -23,7 +21,6 @@ void bubbleSort(int arr[], int n)
     // implementa os enderecos de bidimensionais para apuracao do codigo
     int i, j;
     for (i = 0; i < n - 1; i++)
-
         // Ultimos elementos i ja estao em ordem
         for (j = 0; j < n - i - 1; j++)
             // somente realiza a troca caso seja maior, o proximo valor a ser testado
@@ -45,11 +42,11 @@ int main()
 {
 
     // declarando, respecitvamente, a linha a ser lida e o contador de arquivos
-    string linha_;
+    std::string linha_;
     int k = 0;
     // limpando o arquivo txt do bubble_sort por execucao
     std::fstream file("bubble_sort.txt", std::ios::out | std::ios::trunc);
-    ofstream arquivoEscrita_("bubble_sort.txt", std::ios::app);
+    std::ofstream arquivoEscrita_("bubble_sort.txt", std::ios::app);
     if (arquivoEscrita_.is_open())
     {
         arquivoEscrita_ << "caminho,temp_execucao,qtde \n";
@@ -61,7 +58,7 @@ int main()
         int tamanho = 0;
         // abrindo o arquivo TXT
         // preparando a leitura do arquivo com os dados
-        ifstream arquivoLeitura_(filePaths[k]);
+        std::ifstream arquivoLeitura_(filePaths[k]);
         // preparando a escrita do arquivo para os dados finais
         // ofstream arquivoEscrita_("bubble_sort.txt", std::ios::app);
         //     arquivoEscrita_.close();
@@ -87,7 +84,7 @@ int main()
             auto final = std::chrono::high_resolution_clock::now();
             auto duracao = std::chrono::duration_cast<std::chrono::milliseconds>(final - comeco);
             mostrarDados(arr, sizeof(arr) / sizeof(arr[0]));
-            cout << tamanho - 1 << "\n";
+            std::cout << tamanho - 1 << "\n";
             if (arquivoEscrita_.is_open())
             {
                 arquivoEscrita_ << filePaths[k] << "," << duracao.count() << "ms," << tamanho - 1 << "\n";
